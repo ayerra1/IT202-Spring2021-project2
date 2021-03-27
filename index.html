@@ -67,14 +67,23 @@
 
   function drawCircle()
   {
+    let img = new Image();
+    img.src = "gameImages/ufo.jpg";
+    context.drawImage(img, (player.x ), (player.y ), 10, 20);
     context.beginPath();
     context.arc(player.x,player.y, radius, 0,2*Math.PI);
-    context.strokeStyle = "green";
-    context.fillStyle = "blue";
-    context.lineWidth = 4;
+    // context.strokeStyle = "transperant";
+    context.fillStyle = "transperant";
+    // context.lineWidth = 4;
     context.closePath();
-    context.fill();
-    context.stroke();
+    // context.fill();
+    // context.stroke();
+    
+
+   
+    
+
+
   }
 
 
@@ -241,39 +250,39 @@ window.onload = () => {
     // const ctx = canvas.getContext('2d');
 
     const backgroundImage = new Image();
-    backgroundImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/BG.png';
+    backgroundImage.src = 'gameImages/space1.jpg';
     backgroundImage.position = { x: 0, y: 0}
+    
 
     const backgroudSprite = new ScrollingSprite(backgroundImage, 0,0, canvas.width, canvas.height, 1);
     const backgroundSprite2 = new ScrollingSprite(backgroundImage, -canvas.width, 0, canvas.width, canvas.height, 1);
 
-    const bakcgroundBuildingsImage = new Image();
-    bakcgroundBuildingsImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Background 1.png';
+    // const bakcgroundBuildingsImage = new Image();
+    // bakcgroundBuildingsImage.src = 'unnamed.jpg';
 
-    const backgroundBuildingsSprite = new ScrollingSprite(bakcgroundBuildingsImage, 0,0,canvas.width, canvas.height, 2);
-    const backgroundBuildingsSprite2 = new ScrollingSprite(bakcgroundBuildingsImage, -canvas.width, 0, canvas.width, canvas.height);
+    // const backgroundBuildingsSprite = new ScrollingSprite(bakcgroundBuildingsImage, 0,0,canvas.width, canvas.height, 2);
+    // const backgroundBuildingsSprite2 = new ScrollingSprite(bakcgroundBuildingsImage, -canvas.width, 0, canvas.width, canvas.height);
 
-    const bridgeImage = new Image();
-    bridgeImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Middle.png';
+    // const bridgeImage = new Image();
+    // bridgeImage.src = 'zomb.jpg';
 
-    const middleSprite = new ScrollingSprite(bridgeImage, 0,0, canvas.width, canvas.height, 2.5);
-    const middleSprite2 = new ScrollingSprite(bridgeImage, -canvas.width, 0, canvas.width, canvas.height, 2.5);
+    // const middleSprite = new ScrollingSprite(bridgeImage, 0,0, canvas.width, canvas.height, 2.5);
+    // const middleSprite2 = new ScrollingSprite(bridgeImage, -canvas.width, 0, canvas.width, canvas.height, 2.5);
 
-    const foregroundBuildingImage = new Image();
-    foregroundBuildingImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Foreground.png';
+    // const foregroundBuildingImage = new Image();
+    // foregroundBuildingImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Foreground.png';
 
-    const foregroundBuildingSprite = new ScrollingSprite(foregroundBuildingImage, 0,0, canvas.width, canvas.height, 3);
-    const foregroundBuildingSprite2 = new ScrollingSprite(foregroundBuildingImage, -canvas.width, 0, canvas.width, canvas.height, 3);
+    // const foregroundBuildingSprite = new ScrollingSprite(foregroundBuildingImage, 0,0, canvas.width, canvas.height, 3);
+    // const foregroundBuildingSprite2 = new ScrollingSprite(foregroundBuildingImage, -canvas.width, 0, canvas.width, canvas.height, 3);
 
     const spriteArray = [
         backgroudSprite,
         backgroundSprite2,
-        backgroundBuildingsSprite,
-        backgroundBuildingsSprite2,
-        middleSprite,
-        middleSprite2,
-        foregroundBuildingSprite,
-        foregroundBuildingSprite2
+        // backgroundBuildingsSprite,
+        // backgroundBuildingsSprite2
+       
+        // foregroundBuildingSprite,
+        // foregroundBuildingSprite2
     ];
 
     // Draw loop
@@ -293,7 +302,17 @@ window.onload = () => {
   checkHarmCollision();
   checkBeniftCollision();
 
-        window.requestAnimationFrame(render);
+
+  if (player.lives >0) {
+      window.requestAnimationFrame(render);
+  } else {
+     let ctx2 = canvas.getContext("2d");
+  ctx2.font = "10px Arial";
+  let scoreStr = "score: " + player.point; 
+  ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
+  }
+
+       
     }
     render();
 }
