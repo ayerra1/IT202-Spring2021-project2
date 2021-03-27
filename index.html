@@ -339,15 +339,36 @@ window.onload = () => {
   benifitDraw();
   checkHarmCollision();
   checkBeniftCollision();
+  // let canvas = document.getElementById("myCanvas");
+ctx.font = "10px Comic Sans MS";
+ctx.fillStyle = "green";
+ctx.textAlign = "center";
+
+ctx.fillText("score: " + player.point, 30, 20);
+
+
+ctx.font = "10px Comic Sans MS";
+ctx.fillStyle = "green";
+ctx.textAlign = "center";
+
+ctx.fillText("lives: " + player.lives, 30, 30);
+
+ctx.font = "10px Comic Sans MS";
+ctx.fillStyle = "green";
+ctx.textAlign = "center";
+
+ctx.fillText("level: " + player.level, 30, 40);
+
+
 
 
   if (player.lives >0) {
       window.requestAnimationFrame(render);
   } else {
-     let ctx2 = canvas.getContext("2d");
-  ctx2.font = "10px Arial";
-  let scoreStr = "score: " + player.point; 
-  ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
+     ctx.font = "30px Comic Sans MS";
+ctx.fillStyle = "red";
+ctx.textAlign = "center";
+ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
   }
 
        
