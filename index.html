@@ -88,6 +88,7 @@
 
 
 let ctx = canvas.getContext("2d");
+let ctxB = canvas.getContext("2d");
 
 let enemy = {
   x:canvas.width/2,
@@ -231,11 +232,28 @@ let counterTwo = 3;
       obj.x = canvas.width + obj.radius;
       obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)))
       }
-        ctx.beginPath()
-        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
-        ctx.closePath();
-        ctx.fillStyle = "green";
-        ctx.fill();
+
+      //   let img = new Image();
+    // img.src = "gameImages/aeroplane-plane.png";
+    // context.drawImage(img, (player.x ), (player.y ), 50, 10);
+    // context.beginPath();
+    // context.arc(player.x,player.y, radius, 0,2*Math.PI);
+    // // context.strokeStyle = "transperant";
+    // context.fillStyle = "transperant";
+    // // context.lineWidth = 4;
+    // context.closePath();
+    // // context.fill();
+    // // context.stroke();
+
+        let img = new Image();
+        img.src = "gameImages/dia.png"
+        ctxB.drawImage(img, (obj.x ), (obj.y ), 30, 30);
+        ctxB.beginPath()
+        ctxB.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctxB.fillStyle = "transperant";
+        ctxB.closePath();
+        
+        // ctxB.fill();
         counterTwo+=1;
       });
     
