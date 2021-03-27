@@ -23,7 +23,7 @@
 <body>
 
 <!-- <div> 
-  <button onclick= "draw()" >Click me</button>
+  <button onclick= "render()" >Click me</button>
   </div> -->
 
   <canvas id="html-canvas">
@@ -65,7 +65,7 @@
          
 
 
-  function drawCircle()
+  let drawCircle = () =>
   {
     let img = new Image();
     img.src = "gameImages/aeroplane-plane.png";
@@ -137,7 +137,7 @@ let enemy = {
      }
 
 
-function checkHarmCollision() {
+let checkHarmCollision = () => {
   gameObjs.forEach( (obj) => {
 
        if (areColliding(obj, player)) {
@@ -150,7 +150,7 @@ function checkHarmCollision() {
       });
 }
 
-function checkBeniftCollision() {
+let checkBeniftCollision = () =>  {
   benifit.forEach( (obj) => {
 
        if (areColliding(obj, player)) {
@@ -166,7 +166,7 @@ function checkBeniftCollision() {
 
 let counter = 1;
 
-  function gameObjsDraw() {
+  let gameObjsDraw = () => {
 
 
    gameObjs.forEach( (obj) => {
@@ -182,19 +182,7 @@ let counter = 1;
       obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
       }
 
-    //   let img = new Image();
-    // img.src = "gameImages/aeroplane-plane.png";
-    // context.drawImage(img, (player.x ), (player.y ), 50, 10);
-    // context.beginPath();
-    // context.arc(player.x,player.y, radius, 0,2*Math.PI);
-    // // context.strokeStyle = "transperant";
-    // context.fillStyle = "transperant";
-    // // context.lineWidth = 4;
-    // context.closePath();
-    // // context.fill();
-    // // context.stroke();
-
-
+   
         let img = new Image();
         img.src = "gameImages/ali.png";
         // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
@@ -217,7 +205,7 @@ let counter = 1;
 
 
 let counterTwo = 3;
-  function benifitDraw() {
+  let benifitDraw = () => {
 
 
    benifit.forEach( (obj) => {
@@ -233,17 +221,7 @@ let counterTwo = 3;
       obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)))
       }
 
-      //   let img = new Image();
-    // img.src = "gameImages/aeroplane-plane.png";
-    // context.drawImage(img, (player.x ), (player.y ), 50, 10);
-    // context.beginPath();
-    // context.arc(player.x,player.y, radius, 0,2*Math.PI);
-    // // context.strokeStyle = "transperant";
-    // context.fillStyle = "transperant";
-    // // context.lineWidth = 4;
-    // context.closePath();
-    // // context.fill();
-    // // context.stroke();
+ 
 
         let img = new Image();
         img.src = "gameImages/dia.png"
@@ -295,32 +273,12 @@ window.onload = () => {
     const backgroudSprite = new ScrollingSprite(backgroundImage, 0,0, canvas.width, canvas.height, 1);
     const backgroundSprite2 = new ScrollingSprite(backgroundImage, -canvas.width, 0, canvas.width, canvas.height, 1);
 
-    // const bakcgroundBuildingsImage = new Image();
-    // bakcgroundBuildingsImage.src = 'unnamed.jpg';
-
-    // const backgroundBuildingsSprite = new ScrollingSprite(bakcgroundBuildingsImage, 0,0,canvas.width, canvas.height, 2);
-    // const backgroundBuildingsSprite2 = new ScrollingSprite(bakcgroundBuildingsImage, -canvas.width, 0, canvas.width, canvas.height);
-
-    // const bridgeImage = new Image();
-    // bridgeImage.src = 'zomb.jpg';
-
-    // const middleSprite = new ScrollingSprite(bridgeImage, 0,0, canvas.width, canvas.height, 2.5);
-    // const middleSprite2 = new ScrollingSprite(bridgeImage, -canvas.width, 0, canvas.width, canvas.height, 2.5);
-
-    // const foregroundBuildingImage = new Image();
-    // foregroundBuildingImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Foreground.png';
-
-    // const foregroundBuildingSprite = new ScrollingSprite(foregroundBuildingImage, 0,0, canvas.width, canvas.height, 3);
-    // const foregroundBuildingSprite2 = new ScrollingSprite(foregroundBuildingImage, -canvas.width, 0, canvas.width, canvas.height, 3);
+ 
 
     const spriteArray = [
         backgroudSprite,
         backgroundSprite2,
-        // backgroundBuildingsSprite,
-        // backgroundBuildingsSprite2
-       
-        // foregroundBuildingSprite,
-        // foregroundBuildingSprite2
+        
     ];
 
     // Draw loop
@@ -334,7 +292,12 @@ window.onload = () => {
             drawCircle();
     
     // enemyDraw();
+
+    //if player.score>52 => player.level+=1
     
+ // ifplayer.level == 1 => gameobjsdraw,
+ // if player.level == 2 => moregameobjsdraw, powerups
+
   gameObjsDraw();
   benifitDraw();
   checkHarmCollision();
@@ -377,27 +340,27 @@ ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
 }
 
 
-function draw() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    drawCircle();
+// function draw() {
+//     context.clearRect(0, 0, canvas.width, canvas.height);
+//     drawCircle();
     
-    // enemyDraw();
+//     // enemyDraw();
     
-  gameObjsDraw();
-  benifitDraw();
-  checkHarmCollision();
-  checkBeniftCollision();
+//   gameObjsDraw();
+//   benifitDraw();
+//   checkHarmCollision();
+//   checkBeniftCollision();
  
-  // if (player.lives >0) {
-  //     requestAnimationFrame(draw);
-  // } else {
-  //    let ctx2 = canvas.getContext("2d");
-  // ctx2.font = "10px Arial";
-  // let scoreStr = "score: " + player.point; 
-  // ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
-  // }
+//   // if (player.lives >0) {
+//   //     requestAnimationFrame(draw);
+//   // } else {
+//   //    let ctx2 = canvas.getContext("2d");
+//   // ctx2.font = "10px Arial";
+//   // let scoreStr = "score: " + player.point; 
+//   // ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
+//   // }
  
-  }
+//   }
 
 //   document.addEventListener("DOMContentLoaded", function() {
 
