@@ -180,11 +180,31 @@ let counter = 1;
       obj.x = canvas.width + obj.radius;
       obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
       }
+
+    //   let img = new Image();
+    // img.src = "gameImages/aeroplane-plane.png";
+    // context.drawImage(img, (player.x ), (player.y ), 50, 10);
+    // context.beginPath();
+    // context.arc(player.x,player.y, radius, 0,2*Math.PI);
+    // // context.strokeStyle = "transperant";
+    // context.fillStyle = "transperant";
+    // // context.lineWidth = 4;
+    // context.closePath();
+    // // context.fill();
+    // // context.stroke();
+
+
+        let img = new Image();
+        img.src = "gameImages/ali.png";
+        // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
+        ctx.drawImage(img, (obj.x ), (obj.y ), 20, 20);
+
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.fillStyle = "transperant";
         ctx.closePath();
-        ctx.fillStyle = obj.color;
-        ctx.fill();
+        
+        // ctx.fill();
         counter+=1;
 
          
