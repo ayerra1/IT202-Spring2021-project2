@@ -96,7 +96,7 @@ let enemy = {
 }
 
  // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
-         for(let i =0; i<3; i++) {
+         for(let i =0; i<4; i++) {
         // let randomX =  + (Math.random() * (c.width - (2 * 25)));
         // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
         let randomColor = Math.floor(Math.random()*16777215).toString(16);
@@ -107,7 +107,7 @@ let enemy = {
 
 
        // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
-         for(let i =0; i<3; i++) {
+         for(let i =0; i<4; i++) {
         // let randomX =  + (Math.random() * (c.width - (2 * 25)));
         // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
         let randomColor = Math.floor(Math.random()*16777215).toString(16);
@@ -177,8 +177,8 @@ let counter = 1;
       obj.x -=counter;
 
        if (obj.x < -obj.radius) {
-      obj.x = canvas.width + 10;
-      obj.y = 10 + (Math.random() * (canvas.height - (2 * 10)))
+      obj.x = canvas.width + obj.radius;
+      obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
       }
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
@@ -208,8 +208,8 @@ let counterTwo = 3;
       obj.x -=counterTwo;
 
        if (obj.x < -obj.radius) {
-      obj.x = canvas.width + 10;
-      obj.y = 20 + (Math.random() * (canvas.height - (2 * 10)))
+      obj.x = canvas.width + obj.radius;
+      obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)))
       }
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
