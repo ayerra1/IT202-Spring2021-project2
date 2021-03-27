@@ -21,9 +21,19 @@
     </style>
 </head>
 <body>
+
+<!-- <div> 
+  <button onclick= "draw()" >Click me</button>
+  </div> -->
+
   <canvas id="html-canvas">
 
 <script>
+
+// function myFunction() {
+//   document.getElementById("demo").innerHTML = "Hello World";
+// }
+  
   let canvas = document.querySelector("canvas");
   canvas.style.backgroundColor = "silver";
   let context = canvas.getContext("2d");
@@ -203,35 +213,141 @@ let counterTwo = 3;
    
 }
 
+class ScrollingSprite {
+    constructor(image,x,y,width, height, speed){
+        this.image = image;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.speed = speed;
+    }
+
+    scroll(){
+        this.x -= this.speed;
+        if(this.x <= -this.width){
+            this.x = this.width - 1;
+        }
+    }
+
+    draw(ctx){
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    }
+}
+
+window.onload = () => {
+
+    // const canvas = document.getElementById("html-canvas");
+    // const ctx = canvas.getContext('2d');
+
+    const backgroundImage = new Image();
+    backgroundImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/BG.png';
+    backgroundImage.position = { x: 0, y: 0}
+
+    const backgroudSprite = new ScrollingSprite(backgroundImage, 0,0, canvas.width, canvas.height, 1);
+    const backgroundSprite2 = new ScrollingSprite(backgroundImage, -canvas.width, 0, canvas.width, canvas.height, 1);
+
+    const bakcgroundBuildingsImage = new Image();
+    bakcgroundBuildingsImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Background 1.png';
+
+    const backgroundBuildingsSprite = new ScrollingSprite(bakcgroundBuildingsImage, 0,0,canvas.width, canvas.height, 2);
+    const backgroundBuildingsSprite2 = new ScrollingSprite(bakcgroundBuildingsImage, -canvas.width, 0, canvas.width, canvas.height);
+
+    const bridgeImage = new Image();
+    bridgeImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Middle.png';
+
+    const middleSprite = new ScrollingSprite(bridgeImage, 0,0, canvas.width, canvas.height, 2.5);
+    const middleSprite2 = new ScrollingSprite(bridgeImage, -canvas.width, 0, canvas.width, canvas.height, 2.5);
+
+    const foregroundBuildingImage = new Image();
+    foregroundBuildingImage.src = 'https://raw.githubusercontent.com/luka712/parallax-scrolling/master/assets/Foreground.png';
+
+    const foregroundBuildingSprite = new ScrollingSprite(foregroundBuildingImage, 0,0, canvas.width, canvas.height, 3);
+    const foregroundBuildingSprite2 = new ScrollingSprite(foregroundBuildingImage, -canvas.width, 0, canvas.width, canvas.height, 3);
+
+    const spriteArray = [
+        backgroudSprite,
+        backgroundSprite2,
+        backgroundBuildingsSprite,
+        backgroundBuildingsSprite2,
+        middleSprite,
+        middleSprite2,
+        foregroundBuildingSprite,
+        foregroundBuildingSprite2
+    ];
+
+    // Draw loop
+    const render = () => {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+
+        spriteArray.forEach(sprite => {
+            sprite.scroll();
+            sprite.draw(ctx);
+        });
+            drawCircle();
+    
+    // enemyDraw();
+    
+  gameObjsDraw();
+  benifitDraw();
+  checkHarmCollision();
+  checkBeniftCollision();
+
+        window.requestAnimationFrame(render);
+    }
+    render();
+}
 
 
-  document.addEventListener("DOMContentLoaded", function() {
-
-    function draw() {
+function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawCircle();
     
     // enemyDraw();
     
-gameObjsDraw();
-benifitDraw();
-checkHarmCollision();
-checkBeniftCollision();
+  gameObjsDraw();
+  benifitDraw();
+  checkHarmCollision();
+  checkBeniftCollision();
  
-  if (player.lives >0) {
-      requestAnimationFrame(draw);
-  } else {
-     let ctx2 = canvas.getContext("2d");
-  ctx2.font = "10px Arial";
-  let scoreStr = "score: " + player.point; 
-  ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
-  }
+  // if (player.lives >0) {
+  //     requestAnimationFrame(draw);
+  // } else {
+  //    let ctx2 = canvas.getContext("2d");
+  // ctx2.font = "10px Arial";
+  // let scoreStr = "score: " + player.point; 
+  // ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
+  // }
  
   }
 
-  draw();
+//   document.addEventListener("DOMContentLoaded", function() {
 
-});
+//     function draw() {
+//     context.clearRect(0, 0, canvas.width, canvas.height);
+//     drawCircle();
+    
+//     // enemyDraw();
+    
+// gameObjsDraw();
+// benifitDraw();
+// checkHarmCollision();
+// checkBeniftCollision();
+ 
+//   if (player.lives >0) {
+//       requestAnimationFrame(draw);
+//   } else {
+//      let ctx2 = canvas.getContext("2d");
+//   ctx2.font = "10px Arial";
+//   let scoreStr = "score: " + player.point; 
+//   ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
+//   }
+ 
+//   }
+
+//   draw();
+
+// });
 
 
 // add an event listner for keydown of the up arrow key
