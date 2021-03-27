@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='utf-8'/>
+  <title>HTML Canvas Demo</title>
+  <link rel='stylesheet' href='custom.css'/>
+  <!-- <script src="canvas.js"></script> -->
+
+  <style>
+    canvas {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      background-color: "white";
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: "white";
+    }
+    </style>
+</head>
+<body>
+  <canvas id="html-canvas">
+
+<script>
+  let canvas = document.querySelector("canvas");
+  canvas.style.backgroundColor = "silver";
+  let context = canvas.getContext("2d");
+  let radius = 10;
+  let requestAnimationFrame = window.requestAnimationFrame;
+  let player={
+    imgStr: " ",
+    x: 10,
+    y: 50,
+    point: 0,
+    lives: 5,
+    level: 1,
+    speed: 5,
+    radius: 10
+  };
+
+
+  
+
+
+ // create objects per the lab activity
+      let gameObjs = [];
+      // gameObjs.push( {x: 250, y: 250, radius: 25, color: "red" } )
+      // gameObjs.push( {x: 275, y: 275, radius: 25, color: "green" } )
+      // gameObjs.push( {x: 200, y: 300, radius: 25, color: "blue" } )
+
+
+    let benifit = [] ;
+         
+
+
+  function drawCircle()
+  {
+    context.beginPath();
+    context.arc(player.x,player.y, radius, 0,2*Math.PI);
+    context.strokeStyle = "green";
+    context.fillStyle = "blue";
+    context.lineWidth = 4;
+    context.closePath();
+    context.fill();
+    context.stroke();
+  }
+
+
+let ctx = canvas.getContext("2d");
+
+let enemy = {
+  x:canvas.width/2,
+  y: canvas.height/2,
+  radius: 10
+}
+
+ // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
+         for(let i =0; i<3; i++) {
+        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
+        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        let newColor =  "#" + randomColor;
+        gameObjs.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+
+      }
+
+
+       // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
+         for(let i =0; i<3; i++) {
+        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
+        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        let newColor =  "#" + randomColor;
+        benifit.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+
+      }
+
+
+
+
+ // create a function named areColliding that accepts two objects and returns a boolen based on collision
+
+     let areColliding = (firstObj, secondObj) => {
+       let circle1 = firstObj;
+        let circle2 = secondObj;
+
+        let dx = circle1.x - circle2.x;
+        let dy = circle1.y - circle2.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < circle1.radius + circle2.radius) {
+            return true;
+        }
+        return false;
+     }
+
+
+function checkHarmCollision() {
+  gameObjs.forEach( (obj) => {
+
+       if (areColliding(obj, player)) {
+                player.lives -= 1;
+                obj.x = (canvas.width);
+            obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
+                console.log(player.lives);
+            }
+         
+      });
+}
+
+function checkBeniftCollision() {
+  benifit.forEach( (obj) => {
+
+       if (areColliding(obj, player)) {
+                player.point += 1;
+                obj.x = (canvas.width);
+            obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
+                console.log("score: " + player.point);
+            }
+         
+      });
+}
+
+
+let counter = 1;
+
+  function gameObjsDraw() {
+
+
+   gameObjs.forEach( (obj) => {
+
+     if (counter == 4) {
+       counter = 1;
+     }
+
+      obj.x -=counter;
+
+       if (obj.x < -obj.radius) {
+      obj.x = canvas.width + 10;
+      obj.y = 10 + (Math.random() * (canvas.height - (2 * 10)))
+      }
+        ctx.beginPath()
+        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.closePath();
+        ctx.fillStyle = obj.color;
+        ctx.fill();
+        counter+=1;
+
+         
+      });
+    
+
+   
+}
+
+
+let counterTwo = 3;
+  function benifitDraw() {
+
+
+   benifit.forEach( (obj) => {
+
+     if (counterTwo == 4) {
+       counterTwo = 1;
+     }
+
+      obj.x -=counterTwo;
+
+       if (obj.x < -obj.radius) {
+      obj.x = canvas.width + 10;
+      obj.y = 20 + (Math.random() * (canvas.height - (2 * 10)))
+      }
+        ctx.beginPath()
+        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.closePath();
+        ctx.fillStyle = "green";
+        ctx.fill();
+        counterTwo+=1;
+      });
+    
+   
+}
+
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+    function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawCircle();
+    
+    // enemyDraw();
+    
+gameObjsDraw();
+benifitDraw();
+checkHarmCollision();
+checkBeniftCollision();
+ 
+  if (player.lives >0) {
+      requestAnimationFrame(draw);
+  } else {
+     let ctx2 = canvas.getContext("2d");
+  ctx2.font = "10px Arial";
+  let scoreStr = "score: " + player.point; 
+  ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
+  }
+ 
+  }
+
+  draw();
+
+});
+
+
+// add an event listner for keydown of the up arrow key
+      document.addEventListener("keydown", (event) => {
+        
+        switch(event.keyCode) {
+          // up arrow
+          case (38): {
+            player.y -= player.speed;
+            break;
+          }
+          // down arrow
+          case (40): {
+            player.y += player.speed;
+            break;
+          }
+           // w key (up)
+          case (87): {
+            player.y -= player.speed;
+            break;
+          }
+          // s key (down)
+          case (83): {
+            player.y += player.speed;
+            break;
+          }
+          // default case - unwanted key is pressed
+          default: {
+            console.log("case fell through");
+          }
+        }
+
+      });
+
+</script>
+  </body>
+</html>
