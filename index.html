@@ -40,6 +40,15 @@ let player = {
     speed: 10,
     radius: 10
 };
+
+let boundaryCheck = (player) => {
+        if ((player.y - player.radius) < 0) {
+          player.y = player.radius;
+        } else if ((player.y + player.radius) > canvas.height) {
+          player.y = canvas.height - player.radius;
+        }
+      }
+
 // writing text on to canvas to display start screen content 
 context.font = "20px Comic Sans MS";
 context.fillStyle = "red";
@@ -372,6 +381,7 @@ function start() {
             sprite.draw(ctx);
         });
         drawCircle();
+        boundaryCheck(player);
 
         if (player.point > 20 && player.point <= 40) {
             player.level = 2;
