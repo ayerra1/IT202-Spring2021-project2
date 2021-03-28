@@ -6,9 +6,8 @@ const assets = [
     "./gameImages/ali.png",
     "./gameImages/dia.png",
     "./gameImages/space1.jpg",
-    "./gameImages/ufo.jpg",
-    "./gameImages/unnamed.jpg",
-    "./gameImages/zomb.jpg"
+    "./gameImages/ufo.jpg"
+    
 ]
 
 self.addEventListener("install", installEvent => {
