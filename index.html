@@ -40,7 +40,8 @@ let player = {
     speed: 10,
     radius: 10
 };
-
+    
+// checks the boundary of canvas
 let boundaryCheck = (player) => {
         if ((player.y - player.radius) < 0) {
           player.y = player.radius;
