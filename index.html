@@ -3,7 +3,8 @@
   <head>
   <meta charset='utf-8'/>
   <title>HTML Canvas Demo</title>
-  <link rel='stylesheet' href='custom.css'/>
+ <link rel="manifest" href="manifest.json" />
+    <link rel="icons" type="image/png" sizes="144x144" href="/img/icons/icon.png">
   <!-- <script src="canvas.js"></script> -->
 
   <style>
@@ -33,13 +34,12 @@
 // function myFunction() {
 //   document.getElementById("demo").innerHTML = "Hello World";
 // }
-  
   let canvas = document.querySelector("canvas");
-  canvas.style.backgroundColor = "black";
-  let context = canvas.getContext("2d");
-  let radius = 10;
-  let requestAnimationFrame = window.requestAnimationFrame;
-  let player={
+canvas.style.backgroundColor = "black";
+let context = canvas.getContext("2d");
+let radius = 10;
+let requestAnimationFrame = window.requestAnimationFrame;
+let player = {
     imgStr: " ",
     x: 10,
     y: 50,
@@ -48,184 +48,195 @@
     level: 1,
     speed: 10,
     radius: 10
-  };
+};
 
-  context.font = "20px Comic Sans MS";
+context.font = "20px Comic Sans MS";
 context.fillStyle = "red";
 context.textAlign = "center";
-context.fillText("**Welcome to Alien Reddy**", canvas.width/2, canvas.height/2);
+context.fillText("**Welcome to Alien Reddy**", canvas.width / 2, canvas.height / 2);
 
-context.fillText("|press space to start|", canvas.width/2, canvas.height/2 + 20);
+context.fillText("|press space to start|", canvas.width / 2, canvas.height / 2 + 20);
 
-context.fillText("|press i to get instructions|", canvas.width/2, canvas.height/2 + 40);
-
-
-  
-  
+context.fillText("|press i to get instructions|", canvas.width / 2, canvas.height / 2 + 40);
 
 
- // create objects per the lab activity
-      let gameObjs = [];
-      // gameObjs.push( {x: 250, y: 250, radius: 25, color: "red" } )
-      // gameObjs.push( {x: 275, y: 275, radius: 25, color: "green" } )
-      // gameObjs.push( {x: 200, y: 300, radius: 25, color: "blue" } )
 
 
-    let benifit = [] ;
+// create objects per the lab activity
+let gameObjs = [];
 
-    let gameobjsTwo = [];
+let benifit = [];
 
-    let gameObjsThree = [];
-         
+let gameobjsTwo = [];
+
+let gameObjsThree = [];
 
 
-  let drawCircle = () =>
-  {
+
+let drawCircle = () => {
     let img = new Image();
     img.src = "gameImages/aeroplane-plane.png";
-    context.drawImage(img, (player.x ), (player.y ), 50, 10);
+    context.drawImage(img, (player.x), (player.y), 50, 10);
     context.beginPath();
-    context.arc(player.x,player.y, radius, 0,2*Math.PI);
+    context.arc(player.x, player.y, radius, 0, 2 * Math.PI);
     // context.strokeStyle = "transperant";
     context.fillStyle = "transperant";
     // context.lineWidth = 4;
     context.closePath();
     // context.fill();
     // context.stroke();
-    
-
-   
-    
 
 
-  }
+
+
+}
 
 
 let ctx = canvas.getContext("2d");
 let ctxB = canvas.getContext("2d");
 
 let enemy = {
-  x:canvas.width/2,
-  y: canvas.height/2,
-  radius: 10
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    radius: 10
 }
 
- // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
+// once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
 
-    function createGameObjs() {
-         for(let i =0; i<4; i++) {
+function createGameObjs() {
+    for (let i = 0; i < 4; i++) {
         // let randomX =  + (Math.random() * (c.width - (2 * 25)));
         // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
-        let randomColor = Math.floor(Math.random()*16777215).toString(16);
-        let newColor =  "#" + randomColor;
-        gameObjs.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        let newColor = "#" + randomColor;
+        gameObjs.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 5,
+            color: "red"
+        })
 
-      }
     }
+}
 
-    function createGameObjsTwo() {
-         for(let i =0; i<5; i++) {
+function createGameObjsTwo() {
+    for (let i = 0; i < 5; i++) {
         // let randomX =  + (Math.random() * (c.width - (2 * 25)));
         // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
-        let randomColor = Math.floor(Math.random()*16777215).toString(16);
-        let newColor =  "#" + randomColor;
-        gameobjsTwo.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        let newColor = "#" + randomColor;
+        gameobjsTwo.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 5,
+            color: "red"
+        })
 
-      }
     }
-        
-    function createGameObjsThree() {
-         for(let i =0; i<6; i++) {
+}
+
+function createGameObjsThree() {
+    for (let i = 0; i < 6; i++) {
         // let randomX =  + (Math.random() * (c.width - (2 * 25)));
         // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
-        let randomColor = Math.floor(Math.random()*16777215).toString(16);
-        let newColor =  "#" + randomColor;
-        gameObjsThree.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        let newColor = "#" + randomColor;
+        gameObjsThree.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 5,
+            color: "red"
+        })
 
-      }
     }
+}
 
 
-       // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
-         for(let i =0; i<4; i++) {
-        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
-        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
-        let randomColor = Math.floor(Math.random()*16777215).toString(16);
-        let newColor =  "#" + randomColor;
-        benifit.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+// once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
+for (let i = 0; i < 4; i++) {
+    // let randomX =  + (Math.random() * (c.width - (2 * 25)));
+    // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
+    let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    let newColor = "#" + randomColor;
+    benifit.push({
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        radius: 5,
+        color: "red"
+    })
 
-      }
+}
 
 
 
 
- // create a function named areColliding that accepts two objects and returns a boolen based on collision
+// create a function named areColliding that accepts two objects and returns a boolen based on collision
 
-     let areColliding = (firstObj, secondObj) => {
-       let circle1 = firstObj;
-        let circle2 = secondObj;
+let areColliding = (firstObj, secondObj) => {
+    let circle1 = firstObj;
+    let circle2 = secondObj;
 
-        let dx = circle1.x - circle2.x;
-        let dy = circle1.y - circle2.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
+    let dx = circle1.x - circle2.x;
+    let dy = circle1.y - circle2.y;
+    let distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < circle1.radius + circle2.radius) {
-            return true;
-        }
-        return false;
-     }
+    if (distance < circle1.radius + circle2.radius) {
+        return true;
+    }
+    return false;
+}
 
 
 let checkHarmCollision = () => {
-  gameObjs.forEach( (obj) => {
+    gameObjs.forEach((obj) => {
 
-       if (areColliding(obj, player)) {
-                player.lives -= 1;
-                obj.x = (canvas.width);
+        if (areColliding(obj, player)) {
+            player.lives -= 1;
+            obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
-                console.log(player.lives);
-            }
-         
-      });
+            console.log(player.lives);
+        }
+
+    });
 }
 
 let checkHarmCollisionTwo = () => {
-  gameobjsTwo.forEach( (obj) => {
+    gameobjsTwo.forEach((obj) => {
 
-       if (areColliding(obj, player)) {
-                player.lives -= 1;
-                obj.x = (canvas.width);
+        if (areColliding(obj, player)) {
+            player.lives -= 1;
+            obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
-                console.log(player.lives);
-            }
-         
-      });
+            console.log(player.lives);
+        }
+
+    });
 }
 
 let checkHarmCollisionThree = () => {
-  gameObjsThree.forEach( (obj) => {
+    gameObjsThree.forEach((obj) => {
 
-       if (areColliding(obj, player)) {
-                player.lives -= 1;
-                obj.x = (canvas.width);
+        if (areColliding(obj, player)) {
+            player.lives -= 1;
+            obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
-                console.log(player.lives);
-            }
-         
-      });
+            console.log(player.lives);
+        }
+
+    });
 }
 
-let checkBeniftCollision = () =>  {
-  benifit.forEach( (obj) => {
+let checkBeniftCollision = () => {
+    benifit.forEach((obj) => {
 
-       if (areColliding(obj, player)) {
-                player.point += 1;
-                obj.x = (canvas.width);
+        if (areColliding(obj, player)) {
+            player.point += 1;
+            obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
-                console.log("score: " + player.point);
-            }
-         
-      });
+            console.log("score: " + player.point);
+        }
+
+    });
 }
 
 createGameObjs();
@@ -233,272 +244,181 @@ createGameObjs();
 let counter = 1;
 let track = false;
 
-  let gameObjsDraw = () => {
+let gameObjsDraw = () => {
 
 
     // gameObjs = [];
 
-    
 
-   gameObjs.forEach( (obj) => {
 
-     if (counter == 4) {
-       counter = 1;
-     }
+    gameObjs.forEach((obj) => {
 
-      obj.x -=counter;
+        if (counter == 4) {
+            counter = 1;
+        }
 
-       if (obj.x < -obj.radius) {
-      obj.x = canvas.width + obj.radius;
-      obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
-      }
+        obj.x -= counter;
 
-   
+        if (obj.x < -obj.radius) {
+            obj.x = canvas.width + obj.radius;
+            obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
+        }
+
+
         let img = new Image();
         img.src = "gameImages/ali.png";
         // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
-        ctx.drawImage(img, (obj.x ), (obj.y ), 20, 20);
+        ctx.drawImage(img, (obj.x), (obj.y), 20, 20);
 
         ctx.beginPath()
-        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctx.fillStyle = "transperant";
         ctx.closePath();
-        
+
         // ctx.fill();
-        counter+=1;
+        counter += 1;
 
-         
-      });
-    
-   
 
-   
+    });
+
+
+
+
 }
 
 
-  function checkLevel() {
-    if(player.point>=19 && track == true) {
-      //call newgameobjs
-      createGameObjsTwo();
-      track = false;
+function checkLevel() {
+    if (player.point >= 19 && track == true) {
+        //call newgameobjs
+        createGameObjsTwo();
+        track = false;
     }
-  }
+}
 
-  let trackFour = false;
+let trackFour = false;
 
-  function checkLevelThree() {
-    if(player.point>=39 && trackFour == true) {
-      //call newgameobjs
-      createGameObjsThree();
-      trackFour = false;
+function checkLevelThree() {
+    if (player.point >= 39 && trackFour == true) {
+        //call newgameobjs
+        createGameObjsThree();
+        trackFour = false;
     }
-  }
+}
 
-  let gameObjsLevelTwoDraw = () => {
+let gameObjsLevelTwoDraw = () => {
 
     checkLevel();
-   gameobjsTwo.forEach( (obj) => {
+    gameobjsTwo.forEach((obj) => {
 
-     if (counter == 5) {
-       counter = 1;
-     }
+        if (counter == 5) {
+            counter = 1;
+        }
 
-      obj.x -=counter;
+        obj.x -= counter;
 
-       if (obj.x < -obj.radius) {
-      obj.x = canvas.width + obj.radius;
-      obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
-      }
+        if (obj.x < -obj.radius) {
+            obj.x = canvas.width + obj.radius;
+            obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
+        }
 
-   
+
         let img = new Image();
         img.src = "gameImages/ali.png";
         // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
-        ctx.drawImage(img, (obj.x ), (obj.y ), 20, 20);
+        ctx.drawImage(img, (obj.x), (obj.y), 20, 20);
 
         ctx.beginPath()
-        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctx.fillStyle = "transperant";
         ctx.closePath();
-        
+
         // ctx.fill();
-        counter+=1;
+        counter += 1;
 
-         
-      });
-    
 
-   
+    });
+
+
+
 }
 
- let gameObjsLevelThreeDraw = () => {
+let gameObjsLevelThreeDraw = () => {
 
     checkLevelThree();
-   gameObjsThree.forEach( (obj) => {
+    gameObjsThree.forEach((obj) => {
 
-     if (counter == 5) {
-       counter = 1;
-     }
+        if (counter == 5) {
+            counter = 1;
+        }
 
-      obj.x -=counter;
+        obj.x -= counter;
 
-       if (obj.x < -obj.radius) {
-      obj.x = canvas.width + obj.radius;
-      obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
-      }
+        if (obj.x < -obj.radius) {
+            obj.x = canvas.width + obj.radius;
+            obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
+        }
 
-   
+
         let img = new Image();
         img.src = "gameImages/ali.png";
         // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
-        ctx.drawImage(img, (obj.x ), (obj.y ), 20, 20);
+        ctx.drawImage(img, (obj.x), (obj.y), 20, 20);
 
         ctx.beginPath()
-        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctx.fillStyle = "transperant";
         ctx.closePath();
-        
+
         // ctx.fill();
-        counter+=1;
+        counter += 1;
 
-         
-      });
-    
 
-   
+    });
+
+
+
 }
 
 
 let counterTwo = 3;
-  let benifitDraw = () => {
+let benifitDraw = () => {
 
 
-   benifit.forEach( (obj) => {
+    benifit.forEach((obj) => {
 
-     if (counterTwo == 4) {
-       counterTwo = 1;
-     }
+        if (counterTwo == 4) {
+            counterTwo = 1;
+        }
 
-      obj.x -=counterTwo;
+        obj.x -= counterTwo;
 
-       if (obj.x < -obj.radius) {
-      obj.x = canvas.width + obj.radius;
-      obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)))
-      }
+        if (obj.x < -obj.radius) {
+            obj.x = canvas.width + obj.radius;
+            obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)))
+        }
 
- 
+
 
         let img = new Image();
         img.src = "gameImages/dia.png"
-        ctxB.drawImage(img, (obj.x ), (obj.y ), 30, 30);
+        ctxB.drawImage(img, (obj.x), (obj.y), 30, 30);
         ctxB.beginPath()
-        ctxB.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctxB.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctxB.fillStyle = "transperant";
         ctxB.closePath();
-        
+
         // ctxB.fill();
-        counterTwo+=1;
-      });
-    
-   
+        counterTwo += 1;
+    });
+
+
 }
 
 
-//     // Draw loop
-//     const renderTwo = () => {
-//         ctx.clearRect(0,0,canvas.width, canvas.height);
 
-//         spriteArray.forEach(sprite => {
-//             sprite.scroll();
-//             sprite.draw(ctx);
-//         });
-//             drawCircle();
-    
-//     // enemyDraw();
-
-//     //if player.score>52 => player.level+=1
-
-//     if (player.point > 20 && player.point <= 40) {
-//       player.level =2;
-//       if (trackTwo == false) {
-//         trackTwo = true;
-//         track = true;
-//       }
-//     }
-
-//     if (player.point > 40 ) {
-//       player.level =3;
-//       if (trackFive == false) {
-//         trackFive = true;
-//         trackFour = true;
-//       }
-//     }
-
-    
-
-//     if (player.level == 1) {
-      
-//       gameObjsDraw();
-//       benifitDraw();
-//       checkHarmCollision();
-//       checkBeniftCollision();
-//     } else if (player.level == 2) {
-//        gameObjsLevelTwoDraw();
-//         benifitDraw();
-//      checkHarmCollisionTwo();
-//       checkBeniftCollision();
-//     } else if (player.level == 3) {
-//       gameObjsLevelThreeDraw();
-//       benifitDraw();
-//       checkHarmCollisionThree();
-//       checkBeniftCollision();
-//     }
-
-
-    
-//  // ifplayer.level == 1 => gameobjsdraw,
-//  // if player.level == 2 => moregameobjsdraw, powerups
-
-  
-//   // let canvas = document.getElementById("myCanvas");
-// ctx.font = "10px Comic Sans MS";
-// ctx.fillStyle = "green";
-// ctx.textAlign = "center";
-
-// ctx.fillText("score: " + player.point, 30, 20);
-
-
-// ctx.font = "10px Comic Sans MS";
-// ctx.fillStyle = "green";
-// ctx.textAlign = "center";
-
-// ctx.fillText("lives: " + player.lives, 30, 30);
-
-// ctx.font = "10px Comic Sans MS";
-// ctx.fillStyle = "green";
-// ctx.textAlign = "center";
-
-// ctx.fillText("level: " + player.level, 30, 40);
-
-
-// if (player.lives >0) {
-//       window.requestAnimationFrame(renderTwo);
-//   } else {
-//      ctx.font = "30px Comic Sans MS";
-// ctx.fillStyle = "red";
-// ctx.textAlign = "center";
-// ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
-//   }
-
-
-
-       
-    
-//     // render();
-// }
 
 class ScrollingSprite {
-    constructor(image,x,y,width, height, speed){
+    constructor(image, x, y, width, height, speed) {
         this.image = image;
         this.x = x;
         this.y = y;
@@ -507,14 +427,14 @@ class ScrollingSprite {
         this.speed = speed;
     }
 
-    scroll(){
+    scroll() {
         this.x -= this.speed;
-        if(this.x <= -this.width){
+        if (this.x <= -this.width) {
             this.x = this.width - 1;
         }
     }
 
-    draw(ctx){
+    draw(ctx) {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
@@ -522,343 +442,193 @@ let trackTwo = false;
 let trackFive = false;
 
 function instructions() {
-  context.clearRect(0,0,canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
     context.font = "20px Comic Sans MS";
-context.fillStyle = "red";
-context.textAlign = "center";
-context.fillText("How to play: ", canvas.width/2+10, canvas.height/6);
-context.font = "10px Comic Sans MS";
-context.fillStyle = "green";
-context.fillText("In this game we are ", canvas.width/2+20, canvas.height/6 + 12);
-context.fillText("trying to escape", canvas.width/2+20, canvas.height/6 + 24);
-context.fillText("alien territory in the pod.", canvas.width/2+20, canvas.height/6+ 36);
-context.fillText("press space to start the game", canvas.width/2+20, canvas.height/6+ 48);
-context.fillText("use up and down arrow keys", canvas.width/2+20, canvas.height/6 + 60);
-context.fillText("to control plane", canvas.width/2+20, canvas.height/6 + 72);
-context.fillText("press space in ", canvas.width/2+20, canvas.height/6 + 84);
-context.fillText("the middle of game  ", canvas.width/2+20, canvas.height/6+ 96);
-context.fillText("to speed up the game  ", canvas.width/2+20, canvas.height/6 + 108);
+    context.fillStyle = "red";
+    context.textAlign = "center";
+    context.fillText("How to play: ", canvas.width / 2 + 10, canvas.height / 6);
+    context.font = "10px Comic Sans MS";
+    context.fillStyle = "green";
+    context.fillText("In this game we are ", canvas.width / 2 + 20, canvas.height / 6 + 12);
+    context.fillText("trying to escape", canvas.width / 2 + 20, canvas.height / 6 + 24);
+    context.fillText("alien territory in the pod.", canvas.width / 2 + 20, canvas.height / 6 + 36);
+    context.fillText("press space to start the game", canvas.width / 2 + 20, canvas.height / 6 + 48);
+    context.fillText("use up and down arrow keys", canvas.width / 2 + 20, canvas.height / 6 + 60);
+    context.fillText("to control plane", canvas.width / 2 + 20, canvas.height / 6 + 72);
+    context.fillText("press space in ", canvas.width / 2 + 20, canvas.height / 6 + 84);
+    context.fillText("the middle of game  ", canvas.width / 2 + 20, canvas.height / 6 + 96);
+    context.fillText("to speed up the game  ", canvas.width / 2 + 20, canvas.height / 6 + 108);
 }
 
 function start() {
-   const backgroundImage = new Image();
+    const backgroundImage = new Image();
     backgroundImage.src = 'gameImages/space1.jpg';
-    backgroundImage.position = { x: 0, y: 0}
-    
+    backgroundImage.position = {
+        x: 0,
+        y: 0
+    }
 
-    const backgroudSprite = new ScrollingSprite(backgroundImage, 0,0, canvas.width, canvas.height, 1);
+
+    const backgroudSprite = new ScrollingSprite(backgroundImage, 0, 0, canvas.width, canvas.height, 1);
     const backgroundSprite2 = new ScrollingSprite(backgroundImage, -canvas.width, 0, canvas.width, canvas.height, 1);
 
- 
+
 
     const spriteArray = [
         backgroudSprite,
         backgroundSprite2,
-        
+
     ];
 
     // Draw loop
     const render = () => {
-        ctx.clearRect(0,0,canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         spriteArray.forEach(sprite => {
             sprite.scroll();
             sprite.draw(ctx);
         });
-            drawCircle();
-    
-    // enemyDraw();
+        drawCircle();
 
-    //if player.score>52 => player.level+=1
+        // enemyDraw();
 
-    if (player.point > 20 && player.point <= 40) {
-      player.level =2;
-      if (trackTwo == false) {
-        trackTwo = true;
-        track = true;
-      }
-    }
+        //if player.score>52 => player.level+=1
 
-    if (player.point > 40 ) {
-      player.level =3;
-      if (trackFive == false) {
-        trackFive = true;
-        trackFour = true;
-      }
-    }
+        if (player.point > 20 && player.point <= 40) {
+            player.level = 2;
+            if (trackTwo == false) {
+                trackTwo = true;
+                track = true;
+            }
+        }
 
-    
-
-    if (player.level == 1) {
-      
-      gameObjsDraw();
-      benifitDraw();
-      checkHarmCollision();
-      checkBeniftCollision();
-    } else if (player.level == 2) {
-       gameObjsLevelTwoDraw();
-        benifitDraw();
-     checkHarmCollisionTwo();
-      checkBeniftCollision();
-    } else if (player.level == 3) {
-      gameObjsLevelThreeDraw();
-      benifitDraw();
-      checkHarmCollisionThree();
-      checkBeniftCollision();
-    }
-
-
-    
- // ifplayer.level == 1 => gameobjsdraw,
- // if player.level == 2 => moregameobjsdraw, powerups
-
-  
-  // let canvas = document.getElementById("myCanvas");
-ctx.font = "10px Comic Sans MS";
-ctx.fillStyle = "green";
-ctx.textAlign = "center";
-
-ctx.fillText("score: " + player.point, 30, 20);
-
-
-ctx.font = "10px Comic Sans MS";
-ctx.fillStyle = "green";
-ctx.textAlign = "center";
-
-ctx.fillText("lives: " + player.lives, 30, 30);
-
-ctx.font = "10px Comic Sans MS";
-ctx.fillStyle = "green";
-ctx.textAlign = "center";
-
-ctx.fillText("level: " + player.level, 30, 40);
+        if (player.point > 40) {
+            player.level = 3;
+            if (trackFive == false) {
+                trackFive = true;
+                trackFour = true;
+            }
+        }
 
 
 
+        if (player.level == 1) {
 
-  if (player.lives >0) {
-      window.requestAnimationFrame(render);
-  } else {
-     ctx.font = "30px Comic Sans MS";
-ctx.fillStyle = "red";
-ctx.textAlign = "center";
-ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
-  }
+            gameObjsDraw();
+            benifitDraw();
+            checkHarmCollision();
+            checkBeniftCollision();
+        } else if (player.level == 2) {
+            gameObjsLevelTwoDraw();
+            benifitDraw();
+            checkHarmCollisionTwo();
+            checkBeniftCollision();
+        } else if (player.level == 3) {
+            gameObjsLevelThreeDraw();
+            benifitDraw();
+            checkHarmCollisionThree();
+            checkBeniftCollision();
+        }
 
-       
+
+
+        // ifplayer.level == 1 => gameobjsdraw,
+        // if player.level == 2 => moregameobjsdraw, powerups
+
+
+        // let canvas = document.getElementById("myCanvas");
+        ctx.font = "10px Comic Sans MS";
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center";
+
+        ctx.fillText("score: " + player.point, 30, 20);
+
+
+        ctx.font = "10px Comic Sans MS";
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center";
+
+        ctx.fillText("lives: " + player.lives, 30, 30);
+
+        ctx.font = "10px Comic Sans MS";
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center";
+
+        ctx.fillText("level: " + player.level, 30, 40);
+
+
+
+
+        if (player.lives > 0) {
+            window.requestAnimationFrame(render);
+        } else {
+            ctx.font = "30px Comic Sans MS";
+            ctx.fillStyle = "red";
+            ctx.textAlign = "center";
+            ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+        }
+
+
     }
     render();
 }
 
-// window.onload = () => {
 
-//     // const canvas = document.getElementById("html-canvas");
-//     // const ctx = canvas.getContext('2d');
-
-//     const backgroundImage = new Image();
-//     backgroundImage.src = 'gameImages/space1.jpg';
-//     backgroundImage.position = { x: 0, y: 0}
-    
-
-//     const backgroudSprite = new ScrollingSprite(backgroundImage, 0,0, canvas.width, canvas.height, 1);
-//     const backgroundSprite2 = new ScrollingSprite(backgroundImage, -canvas.width, 0, canvas.width, canvas.height, 1);
-
- 
-
-//     const spriteArray = [
-//         backgroudSprite,
-//         backgroundSprite2,
-        
-//     ];
-
-//     // Draw loop
-//     const render = () => {
-//         ctx.clearRect(0,0,canvas.width, canvas.height);
-
-//         spriteArray.forEach(sprite => {
-//             sprite.scroll();
-//             sprite.draw(ctx);
-//         });
-//             drawCircle();
-    
-//     // enemyDraw();
-
-//     //if player.score>52 => player.level+=1
-
-//     if (player.point > 20 && player.point <= 40) {
-//       player.level =2;
-//       if (trackTwo == false) {
-//         trackTwo = true;
-//         track = true;
-//       }
-//     }
-
-//     if (player.point > 40 ) {
-//       player.level =3;
-//       if (trackFive == false) {
-//         trackFive = true;
-//         trackFour = true;
-//       }
-//     }
-
-    
-
-//     if (player.level == 1) {
-      
-//       gameObjsDraw();
-//       benifitDraw();
-//       checkHarmCollision();
-//       checkBeniftCollision();
-//     } else if (player.level == 2) {
-//        gameObjsLevelTwoDraw();
-//         benifitDraw();
-//      checkHarmCollisionTwo();
-//       checkBeniftCollision();
-//     } else if (player.level == 3) {
-//       gameObjsLevelThreeDraw();
-//       benifitDraw();
-//       checkHarmCollisionThree();
-//       checkBeniftCollision();
-//     }
-
-
-    
-//  // ifplayer.level == 1 => gameobjsdraw,
-//  // if player.level == 2 => moregameobjsdraw, powerups
-
-  
-//   // let canvas = document.getElementById("myCanvas");
-// ctx.font = "10px Comic Sans MS";
-// ctx.fillStyle = "green";
-// ctx.textAlign = "center";
-
-// ctx.fillText("score: " + player.point, 30, 20);
-
-
-// ctx.font = "10px Comic Sans MS";
-// ctx.fillStyle = "green";
-// ctx.textAlign = "center";
-
-// ctx.fillText("lives: " + player.lives, 30, 30);
-
-// ctx.font = "10px Comic Sans MS";
-// ctx.fillStyle = "green";
-// ctx.textAlign = "center";
-
-// ctx.fillText("level: " + player.level, 30, 40);
-
-
-
-
-//   if (player.lives >0) {
-//       window.requestAnimationFrame(render);
-//   } else {
-//      ctx.font = "30px Comic Sans MS";
-// ctx.fillStyle = "red";
-// ctx.textAlign = "center";
-// ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
-//   }
-
-       
-//     }
-//     // render();
-// }
-
-
-// function draw() {
-//     context.clearRect(0, 0, canvas.width, canvas.height);
-//     drawCircle();
-    
-//     // enemyDraw();
-    
-//   gameObjsDraw();
-//   benifitDraw();
-//   checkHarmCollision();
-//   checkBeniftCollision();
- 
-//   // if (player.lives >0) {
-//   //     requestAnimationFrame(draw);
-//   // } else {
-//   //    let ctx2 = canvas.getContext("2d");
-//   // ctx2.font = "10px Arial";
-//   // let scoreStr = "score: " + player.point; 
-//   // ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
-//   // }
- 
-//   }
-
-//   document.addEventListener("DOMContentLoaded", function() {
-
-//     function draw() {
-//     context.clearRect(0, 0, canvas.width, canvas.height);
-//     drawCircle();
-    
-//     // enemyDraw();
-    
-// gameObjsDraw();
-// benifitDraw();
-// checkHarmCollision();
-// checkBeniftCollision();
- 
-//   if (player.lives >0) {
-//       requestAnimationFrame(draw);
-//   } else {
-//      let ctx2 = canvas.getContext("2d");
-//   ctx2.font = "10px Arial";
-//   let scoreStr = "score: " + player.point; 
-//   ctx2.fillText("GameOver", canvas.width/2, canvas.height/2);
-//   }
- 
-//   }
-
-//   draw();
-
-// });
 
 
 // add an event listner for keydown of the up arrow key
-      document.addEventListener("keydown", (event) => {
-        
-        switch(event.keyCode) {
-          // up arrow
-          case (38): {
+document.addEventListener("keydown", (event) => {
+
+    switch (event.keyCode) {
+        // up arrow
+        case (38): {
             player.y -= player.speed;
             break;
-          }
-          // down arrow
-          case (40): {
+        }
+        // down arrow
+        case (40): {
             player.y += player.speed;
             break;
-          }
-           // w key (up)
-          case (87): {
+        }
+        // w key (up)
+        case (87): {
             player.y -= player.speed;
             break;
-          }
-          // s key (down)
-          case (83): {
+        }
+        // s key (down)
+        case (83): {
             player.y += player.speed;
             break;
-          }
-          //space
-          case (32): {
+        }
+        //space
+        case (32): {
             start();
             // console.log("anurag");
             break;
-          }
-          case (73): {
+        }
+        case (73): {
             instructions();
             console.log("anurag");
             break;
-          }
-          // default case - unwanted key is pressed
-          default: {
-            console.log("case fell through");
-          }
         }
+        // default case - unwanted key is pressed
+        default: {
+            console.log("case fell through");
+        }
+    }
 
-      });
+});
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker
+            .register("./serviceWorker.js")
+            .then(res => console.log("service worker registered"))
+            .catch(err => console.log("service worker not registered", err));
+    });
+}
 
 </script>
+
   </body>
 </html>
