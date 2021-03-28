@@ -53,9 +53,11 @@
   context.font = "20px Comic Sans MS";
 context.fillStyle = "red";
 context.textAlign = "center";
-context.fillText("Welcome to Alien Reddy", canvas.width/2, canvas.height/2);
+context.fillText("**Welcome to Alien Reddy**", canvas.width/2, canvas.height/2);
 
-context.fillText("press space to start", canvas.width/2, canvas.height/2 + 20);
+context.fillText("|press space to start|", canvas.width/2, canvas.height/2 + 20);
+
+context.fillText("|press i to get instructions|", canvas.width/2, canvas.height/2 + 40);
 
 
   
@@ -519,6 +521,25 @@ class ScrollingSprite {
 let trackTwo = false;
 let trackFive = false;
 
+function instructions() {
+  context.clearRect(0,0,canvas.width, canvas.height);
+    context.font = "20px Comic Sans MS";
+context.fillStyle = "red";
+context.textAlign = "center";
+context.fillText("How to play: ", canvas.width/2+10, canvas.height/6);
+context.font = "10px Comic Sans MS";
+context.fillStyle = "green";
+context.fillText("In this game we are ", canvas.width/2+20, canvas.height/6 + 12);
+context.fillText("trying to escape", canvas.width/2+20, canvas.height/6 + 24);
+context.fillText("alien territory in the pod.", canvas.width/2+20, canvas.height/6+ 36);
+context.fillText("press space to start the game", canvas.width/2+20, canvas.height/6+ 48);
+context.fillText("use up and down arrow keys", canvas.width/2+20, canvas.height/6 + 60);
+context.fillText("to control plane", canvas.width/2+20, canvas.height/6 + 72);
+context.fillText("press space in ", canvas.width/2+20, canvas.height/6 + 84);
+context.fillText("the middle of game  ", canvas.width/2+20, canvas.height/6+ 96);
+context.fillText("to speed up the game  ", canvas.width/2+20, canvas.height/6 + 108);
+}
+
 function start() {
    const backgroundImage = new Image();
     backgroundImage.src = 'gameImages/space1.jpg';
@@ -823,6 +844,11 @@ ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
           case (32): {
             start();
             // console.log("anurag");
+            break;
+          }
+          case (73): {
+            instructions();
+            console.log("anurag");
             break;
           }
           // default case - unwanted key is pressed
