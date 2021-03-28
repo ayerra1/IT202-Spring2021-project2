@@ -1,4 +1,4 @@
-const cacheName = "ali-baig-it202-project2"
+const cacheName = "project2"
 const assets = [
     "./",
     "./index.html",
