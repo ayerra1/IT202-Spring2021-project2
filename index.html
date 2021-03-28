@@ -334,7 +334,7 @@ class ScrollingSprite {
 let trackTwo = false;
 let trackFive = false;
 
-function instructions() {
+let instructions = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.font = "20px Comic Sans MS";
     context.fillStyle = "red";
@@ -353,7 +353,7 @@ function instructions() {
     context.fillText("to speed up the game  ", canvas.width / 2 + 20, canvas.height / 6 + 108);
 }
 
-function start() {
+let start = () => {
     const backgroundImage = new Image();
     backgroundImage.src = 'gameImages/space1.jpg';
     backgroundImage.position = {
