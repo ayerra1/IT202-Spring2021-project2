@@ -1,9 +1,9 @@
 {
-    "name": "Project 2",
+    "name": "Anurag Project 2",
     "short_name": "Proj 2",
     "start_url": "index.html",
     "display": "standalone",
-    "theme_color": "#db4938",
+    "theme_color": "#DC143C",
     "icons": [
         {
             "src": "./img/icons/icon.png",
