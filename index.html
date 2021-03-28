@@ -24,7 +24,6 @@
   <canvas id="html-canvas">
 
 <script>
-
 // creating the variables and js objects that are required for the game
 let canvas = document.querySelector("canvas");
 canvas.style.backgroundColor = "black";
@@ -47,25 +46,14 @@ context.font = "20px Comic Sans MS";
 context.fillStyle = "red";
 context.textAlign = "center";
 context.fillText("**Welcome to Alien Reddy**", canvas.width / 2, canvas.height / 2);
-
 context.fillText("|press space to start|", canvas.width / 2, canvas.height / 2 + 20);
-
 context.fillText("|press i to get instructions|", canvas.width / 2, canvas.height / 2 + 40);
-
-
-
-
 // creating arrays for the harm objects and benifit objects
 // gameobjs is reffered as harm
 let gameObjs = [];
-
 let benifit = [];
-
 let gameobjsTwo = [];
-
 let gameObjsThree = [];
-
-
 // this function creates the player character on to the canvas
 let drawCircle = () => {
     let img = new Image();
@@ -76,7 +64,6 @@ let drawCircle = () => {
     context.fillStyle = "transperant";
     context.closePath();
 }
-
 let ctx = canvas.getContext("2d");
 let ctxB = canvas.getContext("2d");
 let enemy = {
@@ -84,8 +71,6 @@ let enemy = {
     y: canvas.height / 2,
     radius: 10
 }
-
-
 // creates harm objs for the first level
 let createGameObjs = () => {
     for (let i = 0; i < 4; i++) {
@@ -100,7 +85,6 @@ let createGameObjs = () => {
 
     }
 }
-
 // creates harm objs for the second level
 let createGameObjsTwo = () => {
     for (let i = 0; i < 5; i++) {
@@ -115,7 +99,6 @@ let createGameObjsTwo = () => {
 
     }
 }
-
 // creates harm objs for the final level
 let createGameObjsThree = () => {
     for (let i = 0; i < 6; i++) {
@@ -130,12 +113,7 @@ let createGameObjsThree = () => {
 
     }
 }
-
-
-// once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
 for (let i = 0; i < 4; i++) {
-    // let randomX =  + (Math.random() * (c.width - (2 * 25)));
-    // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
     let randomColor = Math.floor(Math.random() * 16777215).toString(16);
     let newColor = "#" + randomColor;
     benifit.push({
@@ -144,92 +122,71 @@ for (let i = 0; i < 4; i++) {
         radius: 5,
         color: "red"
     })
-
 }
-
-
-
-
 // create a function named areColliding that accepts two objects and returns a boolen based on collision
 let areColliding = (firstObj, secondObj) => {
     let circle1 = firstObj;
     let circle2 = secondObj;
-
     let dx = circle1.x - circle2.x;
     let dy = circle1.y - circle2.y;
     let distance = Math.sqrt(dx * dx + dy * dy);
-
     if (distance < circle1.radius + circle2.radius) {
         return true;
     }
     return false;
 }
-
 // check if the player has collided with level 1 harm objects
 let checkHarmCollision = () => {
     gameObjs.forEach((obj) => {
-
         if (areColliding(obj, player)) {
             player.lives -= 1;
             obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
             console.log(player.lives);
         }
-
     });
 }
-
 // check if the player has collided with level 2 harm objects
 let checkHarmCollisionTwo = () => {
     gameobjsTwo.forEach((obj) => {
-
         if (areColliding(obj, player)) {
             player.lives -= 1;
             obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
             console.log(player.lives);
         }
-
     });
 }
-
 // check if the player has collided with final level harm objects
 let checkHarmCollisionThree = () => {
     gameObjsThree.forEach((obj) => {
-
         if (areColliding(obj, player)) {
             player.lives -= 1;
             obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
             console.log(player.lives);
         }
-
     });
 }
 
 // check if the player has collided with benifit objects 
 let checkBeniftCollision = () => {
     benifit.forEach((obj) => {
-
         if (areColliding(obj, player)) {
             player.point += 1;
             obj.x = (canvas.width);
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
             console.log("score: " + player.point);
         }
-
     });
 }
 
 // calling the function to create first level harm objs
 createGameObjs();
-
 // temp variables use to track the actions of functions
 // and used in conditional blocks
 let counter = 1;
 let track = false;
-
-
 // this function draws first level harm objects on to the screen
 let gameObjsDraw = () => {
     gameObjs.forEach((obj) => {
@@ -237,34 +194,22 @@ let gameObjsDraw = () => {
             counter = 1;
         }
         obj.x -= counter;
-
         if (obj.x < -obj.radius) {
             obj.x = canvas.width + obj.radius;
             obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
         }
-
-
         let img = new Image();
         img.src = "gameImages/ali.png";
         // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
         ctx.drawImage(img, (obj.x), (obj.y), 20, 20);
-
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctx.fillStyle = "transperant";
         ctx.closePath();
-
         // ctx.fill();
         counter += 1;
-
-
     });
-
-
-
-
 }
-
 // function use to check level
 let checkLevel = () => {
     if (player.point >= 19 && track == true) {
@@ -273,113 +218,71 @@ let checkLevel = () => {
         track = false;
     }
 }
-
 let trackFour = false;
-
-function checkLevelThree() {
+let checkLevelThree = () => {
     if (player.point >= 39 && trackFour == true) {
         //call newgameobjs
         createGameObjsThree();
         trackFour = false;
     }
 }
-
 // this function draws second level harm objects on to the screen
 let gameObjsLevelTwoDraw = () => {
-
     checkLevel();
     gameobjsTwo.forEach((obj) => {
-
         if (counter == 5) {
             counter = 1;
         }
-
         obj.x -= counter;
-
         if (obj.x < -obj.radius) {
             obj.x = canvas.width + obj.radius;
             obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
         }
-
-
         let img = new Image();
         img.src = "gameImages/ali.png";
-        // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
         ctx.drawImage(img, (obj.x), (obj.y), 20, 20);
-
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctx.fillStyle = "transperant";
         ctx.closePath();
-
-        // ctx.fill();
         counter += 1;
-
-
     });
-
-
-
 }
-
 // this function draws third level harm objects on to the screen
 let gameObjsLevelThreeDraw = () => {
-
     checkLevelThree();
     gameObjsThree.forEach((obj) => {
-
         if (counter == 5) {
             counter = 1;
         }
-
         obj.x -= counter;
-
         if (obj.x < -obj.radius) {
             obj.x = canvas.width + obj.radius;
             obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
         }
-
-
         let img = new Image();
         img.src = "gameImages/ali.png";
         // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
         ctx.drawImage(img, (obj.x), (obj.y), 20, 20);
-
         ctx.beginPath()
         ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
         ctx.fillStyle = "transperant";
         ctx.closePath();
-
-        // ctx.fill();
         counter += 1;
-
-
     });
-
-
-
 }
-
-
 let counterTwo = 3;
 let benifitDraw = () => {
-
 // this function draws benifit objects on to the screen
     benifit.forEach((obj) => {
-
         if (counterTwo == 4) {
             counterTwo = 1;
         }
-
         obj.x -= counterTwo;
-
         if (obj.x < -obj.radius) {
             obj.x = canvas.width + obj.radius;
             obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)))
         }
-
-
-
         let img = new Image();
         img.src = "gameImages/dia.png"
         ctxB.drawImage(img, (obj.x), (obj.y), 30, 30);
