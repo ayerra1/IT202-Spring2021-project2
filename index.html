@@ -87,7 +87,7 @@ let enemy = {
 
 
 // creates harm objs for the first level
-function createGameObjs() {
+let createGameObjs = () => {
     for (let i = 0; i < 4; i++) {
         let randomColor = Math.floor(Math.random() * 16777215).toString(16);
         let newColor = "#" + randomColor;
