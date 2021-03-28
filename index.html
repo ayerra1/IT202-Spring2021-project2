@@ -35,7 +35,7 @@
 // }
   
   let canvas = document.querySelector("canvas");
-  canvas.style.backgroundColor = "silver";
+  canvas.style.backgroundColor = "black";
   let context = canvas.getContext("2d");
   let radius = 10;
   let requestAnimationFrame = window.requestAnimationFrame;
@@ -50,7 +50,15 @@
     radius: 10
   };
 
+  context.font = "20px Comic Sans MS";
+context.fillStyle = "red";
+context.textAlign = "center";
+context.fillText("Welcome to Alien Reddy", canvas.width/2, canvas.height/2);
 
+context.fillText("press space to start", canvas.width/2, canvas.height/2 + 20);
+
+
+  
   
 
 
@@ -62,6 +70,10 @@
 
 
     let benifit = [] ;
+
+    let gameobjsTwo = [];
+
+    let gameObjsThree = [];
          
 
 
@@ -97,6 +109,8 @@ let enemy = {
 }
 
  // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
+
+    function createGameObjs() {
          for(let i =0; i<4; i++) {
         // let randomX =  + (Math.random() * (c.width - (2 * 25)));
         // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
@@ -105,6 +119,29 @@ let enemy = {
         gameObjs.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
 
       }
+    }
+
+    function createGameObjsTwo() {
+         for(let i =0; i<5; i++) {
+        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
+        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        let newColor =  "#" + randomColor;
+        gameobjsTwo.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+
+      }
+    }
+        
+    function createGameObjsThree() {
+         for(let i =0; i<6; i++) {
+        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
+        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        let newColor =  "#" + randomColor;
+        gameObjsThree.push( {x: canvas.width/2, y: canvas.height/2, radius: 5, color: "red" } )
+
+      }
+    }
 
 
        // once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
@@ -150,6 +187,32 @@ let checkHarmCollision = () => {
       });
 }
 
+let checkHarmCollisionTwo = () => {
+  gameobjsTwo.forEach( (obj) => {
+
+       if (areColliding(obj, player)) {
+                player.lives -= 1;
+                obj.x = (canvas.width);
+            obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
+                console.log(player.lives);
+            }
+         
+      });
+}
+
+let checkHarmCollisionThree = () => {
+  gameObjsThree.forEach( (obj) => {
+
+       if (areColliding(obj, player)) {
+                player.lives -= 1;
+                obj.x = (canvas.width);
+            obj.y = obj.radius + (Math.random() * (canvas.height - (2 * obj.radius)));
+                console.log(player.lives);
+            }
+         
+      });
+}
+
 let checkBeniftCollision = () =>  {
   benifit.forEach( (obj) => {
 
@@ -163,15 +226,115 @@ let checkBeniftCollision = () =>  {
       });
 }
 
+createGameObjs();
 
 let counter = 1;
+let track = false;
 
   let gameObjsDraw = () => {
 
 
+    // gameObjs = [];
+
+    
+
    gameObjs.forEach( (obj) => {
 
      if (counter == 4) {
+       counter = 1;
+     }
+
+      obj.x -=counter;
+
+       if (obj.x < -obj.radius) {
+      obj.x = canvas.width + obj.radius;
+      obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
+      }
+
+   
+        let img = new Image();
+        img.src = "gameImages/ali.png";
+        // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
+        ctx.drawImage(img, (obj.x ), (obj.y ), 20, 20);
+
+        ctx.beginPath()
+        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.fillStyle = "transperant";
+        ctx.closePath();
+        
+        // ctx.fill();
+        counter+=1;
+
+         
+      });
+    
+   
+
+   
+}
+
+
+  function checkLevel() {
+    if(player.point>=19 && track == true) {
+      //call newgameobjs
+      createGameObjsTwo();
+      track = false;
+    }
+  }
+
+  let trackFour = false;
+
+  function checkLevelThree() {
+    if(player.point>=39 && trackFour == true) {
+      //call newgameobjs
+      createGameObjsThree();
+      trackFour = false;
+    }
+  }
+
+  let gameObjsLevelTwoDraw = () => {
+
+    checkLevel();
+   gameobjsTwo.forEach( (obj) => {
+
+     if (counter == 5) {
+       counter = 1;
+     }
+
+      obj.x -=counter;
+
+       if (obj.x < -obj.radius) {
+      obj.x = canvas.width + obj.radius;
+      obj.y = 5 + (Math.random() * (canvas.height - (2 * 5)))
+      }
+
+   
+        let img = new Image();
+        img.src = "gameImages/ali.png";
+        // ctx.drawImage(img, (obj.x ), (obj.y ), 30, 30);
+        ctx.drawImage(img, (obj.x ), (obj.y ), 20, 20);
+
+        ctx.beginPath()
+        ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI*2);
+        ctx.fillStyle = "transperant";
+        ctx.closePath();
+        
+        // ctx.fill();
+        counter+=1;
+
+         
+      });
+    
+
+   
+}
+
+ let gameObjsLevelThreeDraw = () => {
+
+    checkLevelThree();
+   gameObjsThree.forEach( (obj) => {
+
+     if (counter == 5) {
        counter = 1;
      }
 
@@ -238,6 +401,100 @@ let counterTwo = 3;
    
 }
 
+
+//     // Draw loop
+//     const renderTwo = () => {
+//         ctx.clearRect(0,0,canvas.width, canvas.height);
+
+//         spriteArray.forEach(sprite => {
+//             sprite.scroll();
+//             sprite.draw(ctx);
+//         });
+//             drawCircle();
+    
+//     // enemyDraw();
+
+//     //if player.score>52 => player.level+=1
+
+//     if (player.point > 20 && player.point <= 40) {
+//       player.level =2;
+//       if (trackTwo == false) {
+//         trackTwo = true;
+//         track = true;
+//       }
+//     }
+
+//     if (player.point > 40 ) {
+//       player.level =3;
+//       if (trackFive == false) {
+//         trackFive = true;
+//         trackFour = true;
+//       }
+//     }
+
+    
+
+//     if (player.level == 1) {
+      
+//       gameObjsDraw();
+//       benifitDraw();
+//       checkHarmCollision();
+//       checkBeniftCollision();
+//     } else if (player.level == 2) {
+//        gameObjsLevelTwoDraw();
+//         benifitDraw();
+//      checkHarmCollisionTwo();
+//       checkBeniftCollision();
+//     } else if (player.level == 3) {
+//       gameObjsLevelThreeDraw();
+//       benifitDraw();
+//       checkHarmCollisionThree();
+//       checkBeniftCollision();
+//     }
+
+
+    
+//  // ifplayer.level == 1 => gameobjsdraw,
+//  // if player.level == 2 => moregameobjsdraw, powerups
+
+  
+//   // let canvas = document.getElementById("myCanvas");
+// ctx.font = "10px Comic Sans MS";
+// ctx.fillStyle = "green";
+// ctx.textAlign = "center";
+
+// ctx.fillText("score: " + player.point, 30, 20);
+
+
+// ctx.font = "10px Comic Sans MS";
+// ctx.fillStyle = "green";
+// ctx.textAlign = "center";
+
+// ctx.fillText("lives: " + player.lives, 30, 30);
+
+// ctx.font = "10px Comic Sans MS";
+// ctx.fillStyle = "green";
+// ctx.textAlign = "center";
+
+// ctx.fillText("level: " + player.level, 30, 40);
+
+
+// if (player.lives >0) {
+//       window.requestAnimationFrame(renderTwo);
+//   } else {
+//      ctx.font = "30px Comic Sans MS";
+// ctx.fillStyle = "red";
+// ctx.textAlign = "center";
+// ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
+//   }
+
+
+
+       
+    
+//     // render();
+// }
+
 class ScrollingSprite {
     constructor(image,x,y,width, height, speed){
         this.image = image;
@@ -259,13 +516,11 @@ class ScrollingSprite {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
+let trackTwo = false;
+let trackFive = false;
 
-window.onload = () => {
-
-    // const canvas = document.getElementById("html-canvas");
-    // const ctx = canvas.getContext('2d');
-
-    const backgroundImage = new Image();
+function start() {
+   const backgroundImage = new Image();
     backgroundImage.src = 'gameImages/space1.jpg';
     backgroundImage.position = { x: 0, y: 0}
     
@@ -294,14 +549,49 @@ window.onload = () => {
     // enemyDraw();
 
     //if player.score>52 => player.level+=1
+
+    if (player.point > 20 && player.point <= 40) {
+      player.level =2;
+      if (trackTwo == false) {
+        trackTwo = true;
+        track = true;
+      }
+    }
+
+    if (player.point > 40 ) {
+      player.level =3;
+      if (trackFive == false) {
+        trackFive = true;
+        trackFour = true;
+      }
+    }
+
+    
+
+    if (player.level == 1) {
+      
+      gameObjsDraw();
+      benifitDraw();
+      checkHarmCollision();
+      checkBeniftCollision();
+    } else if (player.level == 2) {
+       gameObjsLevelTwoDraw();
+        benifitDraw();
+     checkHarmCollisionTwo();
+      checkBeniftCollision();
+    } else if (player.level == 3) {
+      gameObjsLevelThreeDraw();
+      benifitDraw();
+      checkHarmCollisionThree();
+      checkBeniftCollision();
+    }
+
+
     
  // ifplayer.level == 1 => gameobjsdraw,
  // if player.level == 2 => moregameobjsdraw, powerups
 
-  gameObjsDraw();
-  benifitDraw();
-  checkHarmCollision();
-  checkBeniftCollision();
+  
   // let canvas = document.getElementById("myCanvas");
 ctx.font = "10px Comic Sans MS";
 ctx.fillStyle = "green";
@@ -338,6 +628,120 @@ ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
     }
     render();
 }
+
+// window.onload = () => {
+
+//     // const canvas = document.getElementById("html-canvas");
+//     // const ctx = canvas.getContext('2d');
+
+//     const backgroundImage = new Image();
+//     backgroundImage.src = 'gameImages/space1.jpg';
+//     backgroundImage.position = { x: 0, y: 0}
+    
+
+//     const backgroudSprite = new ScrollingSprite(backgroundImage, 0,0, canvas.width, canvas.height, 1);
+//     const backgroundSprite2 = new ScrollingSprite(backgroundImage, -canvas.width, 0, canvas.width, canvas.height, 1);
+
+ 
+
+//     const spriteArray = [
+//         backgroudSprite,
+//         backgroundSprite2,
+        
+//     ];
+
+//     // Draw loop
+//     const render = () => {
+//         ctx.clearRect(0,0,canvas.width, canvas.height);
+
+//         spriteArray.forEach(sprite => {
+//             sprite.scroll();
+//             sprite.draw(ctx);
+//         });
+//             drawCircle();
+    
+//     // enemyDraw();
+
+//     //if player.score>52 => player.level+=1
+
+//     if (player.point > 20 && player.point <= 40) {
+//       player.level =2;
+//       if (trackTwo == false) {
+//         trackTwo = true;
+//         track = true;
+//       }
+//     }
+
+//     if (player.point > 40 ) {
+//       player.level =3;
+//       if (trackFive == false) {
+//         trackFive = true;
+//         trackFour = true;
+//       }
+//     }
+
+    
+
+//     if (player.level == 1) {
+      
+//       gameObjsDraw();
+//       benifitDraw();
+//       checkHarmCollision();
+//       checkBeniftCollision();
+//     } else if (player.level == 2) {
+//        gameObjsLevelTwoDraw();
+//         benifitDraw();
+//      checkHarmCollisionTwo();
+//       checkBeniftCollision();
+//     } else if (player.level == 3) {
+//       gameObjsLevelThreeDraw();
+//       benifitDraw();
+//       checkHarmCollisionThree();
+//       checkBeniftCollision();
+//     }
+
+
+    
+//  // ifplayer.level == 1 => gameobjsdraw,
+//  // if player.level == 2 => moregameobjsdraw, powerups
+
+  
+//   // let canvas = document.getElementById("myCanvas");
+// ctx.font = "10px Comic Sans MS";
+// ctx.fillStyle = "green";
+// ctx.textAlign = "center";
+
+// ctx.fillText("score: " + player.point, 30, 20);
+
+
+// ctx.font = "10px Comic Sans MS";
+// ctx.fillStyle = "green";
+// ctx.textAlign = "center";
+
+// ctx.fillText("lives: " + player.lives, 30, 30);
+
+// ctx.font = "10px Comic Sans MS";
+// ctx.fillStyle = "green";
+// ctx.textAlign = "center";
+
+// ctx.fillText("level: " + player.level, 30, 40);
+
+
+
+
+//   if (player.lives >0) {
+//       window.requestAnimationFrame(render);
+//   } else {
+//      ctx.font = "30px Comic Sans MS";
+// ctx.fillStyle = "red";
+// ctx.textAlign = "center";
+// ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
+//   }
+
+       
+//     }
+//     // render();
+// }
 
 
 // function draw() {
@@ -413,6 +817,12 @@ ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
           // s key (down)
           case (83): {
             player.y += player.speed;
+            break;
+          }
+          //space
+          case (32): {
+            start();
+            // console.log("anurag");
             break;
           }
           // default case - unwanted key is pressed
