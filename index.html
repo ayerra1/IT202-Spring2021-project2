@@ -5,8 +5,7 @@
   <title>HTML Canvas Demo</title>
  <link rel="manifest" href="manifest.json" />
     <link rel="icons" type="image/png" sizes="144x144" href="/img/icons/icon.png">
-  <!-- <script src="canvas.js"></script> -->
-
+<!-- basic styling for the canvas and body  -->
   <style>
     canvas {
       height: 100vh;
@@ -22,19 +21,12 @@
     </style>
 </head>
 <body>
-
-<!-- <div> 
-  <button onclick= "render()" >Click me</button>
-  </div> -->
-
   <canvas id="html-canvas">
 
 <script>
 
-// function myFunction() {
-//   document.getElementById("demo").innerHTML = "Hello World";
-// }
-  let canvas = document.querySelector("canvas");
+// creating the variables and js objects that are required for the game
+let canvas = document.querySelector("canvas");
 canvas.style.backgroundColor = "black";
 let context = canvas.getContext("2d");
 let radius = 10;
@@ -50,6 +42,7 @@ let player = {
     radius: 10
 };
 
+// writing text on to canvas to display start screen content 
 context.font = "20px Comic Sans MS";
 context.fillStyle = "red";
 context.textAlign = "center";
@@ -62,7 +55,8 @@ context.fillText("|press i to get instructions|", canvas.width / 2, canvas.heigh
 
 
 
-// create objects per the lab activity
+// creating arrays for the harm objects and benifit objects
+// gameobjs is reffered as harm
 let gameObjs = [];
 
 let benifit = [];
@@ -72,41 +66,29 @@ let gameobjsTwo = [];
 let gameObjsThree = [];
 
 
-
+// this function creates the player character on to the canvas
 let drawCircle = () => {
     let img = new Image();
     img.src = "gameImages/aeroplane-plane.png";
     context.drawImage(img, (player.x), (player.y), 50, 10);
     context.beginPath();
     context.arc(player.x, player.y, radius, 0, 2 * Math.PI);
-    // context.strokeStyle = "transperant";
     context.fillStyle = "transperant";
-    // context.lineWidth = 4;
     context.closePath();
-    // context.fill();
-    // context.stroke();
-
-
-
-
 }
-
 
 let ctx = canvas.getContext("2d");
 let ctxB = canvas.getContext("2d");
-
 let enemy = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     radius: 10
 }
 
-// once you get that working, update the code above to create 25 additional gameObjects with random x, y and color values; and push them to the array before the drawing and comparison
 
+// creates harm objs for the first level
 function createGameObjs() {
     for (let i = 0; i < 4; i++) {
-        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
-        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
         let randomColor = Math.floor(Math.random() * 16777215).toString(16);
         let newColor = "#" + randomColor;
         gameObjs.push({
@@ -119,10 +101,9 @@ function createGameObjs() {
     }
 }
 
+// creates harm objs for the second level
 function createGameObjsTwo() {
     for (let i = 0; i < 5; i++) {
-        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
-        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
         let randomColor = Math.floor(Math.random() * 16777215).toString(16);
         let newColor = "#" + randomColor;
         gameobjsTwo.push({
@@ -135,10 +116,9 @@ function createGameObjsTwo() {
     }
 }
 
+// creates harm objs for the final level
 function createGameObjsThree() {
     for (let i = 0; i < 6; i++) {
-        // let randomX =  + (Math.random() * (c.width - (2 * 25)));
-        // let randomY = 25 + (Math.random() * (c.height - (2 * 25)));
         let randomColor = Math.floor(Math.random() * 16777215).toString(16);
         let newColor = "#" + randomColor;
         gameObjsThree.push({
@@ -171,7 +151,6 @@ for (let i = 0; i < 4; i++) {
 
 
 // create a function named areColliding that accepts two objects and returns a boolen based on collision
-
 let areColliding = (firstObj, secondObj) => {
     let circle1 = firstObj;
     let circle2 = secondObj;
@@ -186,7 +165,7 @@ let areColliding = (firstObj, secondObj) => {
     return false;
 }
 
-
+// check if the player has collided with level 1 harm objects
 let checkHarmCollision = () => {
     gameObjs.forEach((obj) => {
 
@@ -200,6 +179,7 @@ let checkHarmCollision = () => {
     });
 }
 
+// check if the player has collided with level 2 harm objects
 let checkHarmCollisionTwo = () => {
     gameobjsTwo.forEach((obj) => {
 
@@ -213,6 +193,7 @@ let checkHarmCollisionTwo = () => {
     });
 }
 
+// check if the player has collided with final level harm objects
 let checkHarmCollisionThree = () => {
     gameObjsThree.forEach((obj) => {
 
@@ -226,6 +207,7 @@ let checkHarmCollisionThree = () => {
     });
 }
 
+// check if the player has collided with benifit objects 
 let checkBeniftCollision = () => {
     benifit.forEach((obj) => {
 
@@ -239,24 +221,21 @@ let checkBeniftCollision = () => {
     });
 }
 
+// calling the function to create first level harm objs
 createGameObjs();
 
+// temp variables use to track the actions of functions
+// and used in conditional blocks
 let counter = 1;
 let track = false;
 
+
+// this function draws first level harm objects on to the screen
 let gameObjsDraw = () => {
-
-
-    // gameObjs = [];
-
-
-
     gameObjs.forEach((obj) => {
-
         if (counter == 4) {
             counter = 1;
         }
-
         obj.x -= counter;
 
         if (obj.x < -obj.radius) {
@@ -305,6 +284,7 @@ function checkLevelThree() {
     }
 }
 
+// this function draws second level harm objects on to the screen
 let gameObjsLevelTwoDraw = () => {
 
     checkLevel();
@@ -342,6 +322,7 @@ let gameObjsLevelTwoDraw = () => {
 
 }
 
+// this function draws third level harm objects on to the screen
 let gameObjsLevelThreeDraw = () => {
 
     checkLevelThree();
@@ -383,7 +364,7 @@ let gameObjsLevelThreeDraw = () => {
 let counterTwo = 3;
 let benifitDraw = () => {
 
-
+// this function draws benifit objects on to the screen
     benifit.forEach((obj) => {
 
         if (counterTwo == 4) {
@@ -490,10 +471,6 @@ function start() {
         });
         drawCircle();
 
-        // enemyDraw();
-
-        //if player.score>52 => player.level+=1
-
         if (player.point > 20 && player.point <= 40) {
             player.level = 2;
             if (trackTwo == false) {
@@ -509,8 +486,6 @@ function start() {
                 trackFour = true;
             }
         }
-
-
 
         if (player.level == 1) {
 
@@ -531,12 +506,6 @@ function start() {
         }
 
 
-
-        // ifplayer.level == 1 => gameobjsdraw,
-        // if player.level == 2 => moregameobjsdraw, powerups
-
-
-        // let canvas = document.getElementById("myCanvas");
         ctx.font = "10px Comic Sans MS";
         ctx.fillStyle = "green";
         ctx.textAlign = "center";
@@ -557,8 +526,6 @@ function start() {
         ctx.fillText("level: " + player.level, 30, 40);
 
 
-
-
         if (player.lives > 0) {
             window.requestAnimationFrame(render);
         } else {
@@ -574,9 +541,6 @@ function start() {
 }
 
 
-
-
-// add an event listner for keydown of the up arrow key
 document.addEventListener("keydown", (event) => {
 
     switch (event.keyCode) {
